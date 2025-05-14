@@ -29,28 +29,34 @@ class Main {
                 System.out.println("Błędna data urodzenia! Poprawny format to DD-MM-YYYY.");
             } catch(InputMismatchException e) {
                 System.out.println("Podaj liczbę!");
-                scan.nextLine();  
+                scan.nextLine();  // Usuwamy zły input
             }
         }
     }
 
     public static int menu() {
-        System.out.println("Wciśnij:");
-        System.out.println("1 - aby dodać studenta");
-        System.out.println("2 - aby wypisać wszystkich studentów");
-        System.out.println("3 - aby wyszukać studenta po imieniu");
-        System.out.println("0 - aby wyjść z programu");
-
-        int choice = 0;
+        int choice = -1;  // Ustawiamy początkową wartość, która będzie wskazywać na błędny wybór
         boolean validInput = false;
 
         while (!validInput) {
+            System.out.println("Wciśnij:");
+            System.out.println("1 - aby dodać studenta");
+            System.out.println("2 - aby wypisać wszystkich studentów");
+            System.out.println("3 - aby wyszukać studenta po imieniu");
+            System.out.println("0 - aby wyjść z programu");
+
             try {
                 choice = scan.nextInt();
-                validInput = true;  
+
+                // Sprawdzamy, czy wybór mieści się w zakresie 0-3
+                if (choice >= 0 && choice <= 3) {
+                    validInput = true;  // Jeśli wybór jest poprawny, ustawiamy validInput na true
+                } else {
+                    System.out.println("Wybór spoza zakresu! Podaj liczbę od 0 do 3.");
+                }
             } catch (InputMismatchException e) {
-                System.out.println("Podaj liczbę!"); 
-                scan.nextLine();
+                System.out.println("Podaj liczbę!");  // Komunikat o błędzie
+                scan.nextLine();  // Usuwamy zły input
             }
         }
 
